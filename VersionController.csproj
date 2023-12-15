@@ -9,16 +9,21 @@
     <Product>Version Controller</Product>
     <Authors>Tan Chee Boon</Authors>
     <Copyright>Copyright @ 2023</Copyright>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resource\**" />
+    <EmbeddedResource Remove="Resource\**" />
+    <None Remove="Resource\**" />
+    <Page Remove="Resource\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="Resources\Resources.csproj" />
+    <ProjectReference Include="Resource\Resource.csproj" />
   </ItemGroup>
 
 </Project>
