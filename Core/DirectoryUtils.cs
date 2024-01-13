@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,13 +10,15 @@ namespace VersionController.Core
 {
     public class DirectoryUtils
     {
+        private readonly ILogger _logger;
         private const string _nugetPackagesPath = @"\Microsoft SDKs\NuGetPackages";
         private const string _iconResourcePath = @"/Resource;component/Resources/Icons/";
         private const string _folderPattern = @"(?<=\..*)\.";
         private string _filterFileNames = String.Empty;
 
-        public DirectoryUtils(string filterFileNames)
+        public DirectoryUtils(ILogger logger, string filterFileNames)
         {
+            _logger = logger;
             _filterFileNames = filterFileNames;
         }
 
@@ -34,6 +37,8 @@ namespace VersionController.Core
                     folders.Add(new Folder(Path.GetFileName(folder.Substring(match.Index + 1).ToUpper()), _iconResourcePath + "Fail16x16.png"));
                 }
             }
+
+            _logger.Information("Folders loaded successfully");
 
             return folders;
         }
@@ -66,22 +71,22 @@ namespace VersionController.Core
                         {
                             //TODO: Add log to track which directory is on-delete.
                             Directory.Delete(nugetFolder.FullName, true);
+                            _logger.Information($"{nugetFolder.FullName} delete successfully");
                         }
                         catch (IOException ex)
                         {
-                            throw new IOException($"Unable to delete because file in used : {ex.Message}");
+                            _logger.Error($"Unable to delete because file in used : {ex.Message}");
                         }
                         catch (UnauthorizedAccessException ex)
                         {
-                            throw new UnauthorizedAccessException($"Unable to delete because file is access denied : {ex.Message}");
+                            _logger.Error($"Unable to delete because file is access denied : {ex.Message}");
                         }
                     });
                 });
 
             });
 
-            //TODO: Add log for delete completed 
-            //message = "Deleted all folder in .nuget and NugetPackages directory";
+            _logger.Information("Deleted all folder in .nuget and NugetPackages directory");
         }
 
         public void Publish(string directory, string fileName)
@@ -109,13 +114,12 @@ namespace VersionController.Core
                         }
                     });
                 }
-                catch (Exception ex)
+                catch (ArgumentException ex)
                 {
-                    throw new ArgumentException($"Unable to publish : {ex.Message}");
+                    _logger.Error($"Unable to publish : {ex.Message}");
                 }
 
-                //TODO: Add log for publish completed 
-                //message = "Publish of NuGet in NugetPackages directory is Completed";
+                _logger.Information("Publish of NuGet in NugetPackages directory is Completed");
             }
         }
     }
