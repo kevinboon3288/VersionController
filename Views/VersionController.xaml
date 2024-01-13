@@ -32,5 +32,10 @@
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
             <!--TODO: Update the contents in future-->
         </Border>
+        <Border Grid.Column="0" Grid.Row="1">
+            <StackPanel >
+                <TextBox x:Name="LogMessageBox" Style="{StaticResource LogMessageTextBoxStyle}"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
