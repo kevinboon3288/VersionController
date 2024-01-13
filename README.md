@@ -9,3 +9,4 @@ It is a WPF project using MVVM architecture design and Prism Library as a framew
 - C#
 - Prism
 - MVVM
+- Serilog
