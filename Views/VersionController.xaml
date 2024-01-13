@@ -31,7 +31,6 @@
         </Grid.RowDefinitions>
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
             <!--TODO: Update the contents in future-->
-            <Button Command="{Binding TriggerCommand}" Width="100px" Height="50px" Content="click me"/>
         </Border>
         <Border Grid.Column="0" Grid.Row="1">
             <StackPanel >
