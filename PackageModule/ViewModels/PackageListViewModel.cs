@@ -29,7 +29,6 @@ namespace VersionController.PackageModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            //throw new System.NotImplementedException();
         }
     }
 }

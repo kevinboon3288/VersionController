@@ -24,16 +24,13 @@ namespace VersionController.Main
         public void OnInitialized(IContainerProvider containerProvider)
         {
             _regionManager.RegisterViewWithRegion("MainContentRegion", typeof(MainView));
-            //_regionManager.RegisterViewWithRegion("PackageListContentRegion", typeof(PackageView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<MainView>();
-            //containerRegistry.RegisterForNavigation<PackageView>();
            
             ViewModelLocationProvider.Register<MainView, MainViewModel>();
-            //ViewModelLocationProvider.Register<PackageView, PackageListViewModel>();
         }
     }
 }
