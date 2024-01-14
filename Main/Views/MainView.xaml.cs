@@ -1,28 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using VersionController.Main.ViewModels;
 using VersionController.Services.Events;
-using VersionController.ViewModels;
 
-namespace VersionController
+namespace VersionController.Main.Views
 {
     /// <summary>
-    /// Interaction logic for VersionController.xaml
+    /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class VersionControllerWindow : Window
+    public partial class MainView : UserControl
     {
-        public VersionControllerWindow()
+        public MainView()
         {
             InitializeComponent();
 
-            VersionControllerViewModel vm = (VersionControllerViewModel)this.DataContext;
+            MainViewModel vm = (MainViewModel)this.DataContext;
             vm.LogReceived += OnLogReceived;
         }
 
-        private void OnLogReceived(object sender, EventArgs e) 
+        private void OnLogReceived(object sender, EventArgs e)
         {
             if (e is LogEventArgs eventArgs)
             {
-                try 
+                try
                 {
                     LogMessageBox.Dispatcher.BeginInvoke(new Action(() =>
                     {

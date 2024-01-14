@@ -8,8 +8,11 @@ using Serilog;
 using Serilog.Core;
 using System.Windows;
 using Unity;
+using VersionController.Main.Views;
+using VersionController.Main.ViewModels;
 using VersionController.Services;
-using VersionController.ViewModels;
+using VersionController.PackageModule.Views;
+using VersionController.PackageModule.ViewModels;
 
 namespace VersionController
 {
@@ -39,6 +42,9 @@ namespace VersionController
                 .CreateLogger());
 
             _regionManager = containerRegistry.GetContainer().Resolve<IRegionManager>();
+
+            containerRegistry.RegisterForNavigation<MainView>();
+            containerRegistry.RegisterForNavigation<PackageListView>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -51,12 +57,14 @@ namespace VersionController
             base.ConfigureViewModelLocator();
 
             //TODO: Register New Added View and ViewModel at ViewModelLocationProvider
-            ViewModelLocationProvider.Register<VersionControllerWindow, VersionControllerViewModel>();
+            ViewModelLocationProvider.Register<PackageListView, PackageListViewModel>();
+            ViewModelLocationProvider.Register<MainView, MainViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            //moduleCatalog.AddModule<VersionControllerMainView>();
+            moduleCatalog.AddModule<Main.MainModule>();
+            moduleCatalog.AddModule<PackageModule.PackageModule>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
