@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using Serilog;
 using System;
+using VersionController.PackageModule.ViewModels;
 using VersionController.Services.Events;
 
 namespace VersionController.Main.ViewModels
@@ -37,6 +38,8 @@ namespace VersionController.Main.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            _logger.Information($"It is at {nameof(MainViewModel)}.{nameof(OnNavigatedTo)} now.");
+
             IRegion region = _regionManager.Regions["PackageListContentRegion"];
             region.RequestNavigate("PackageListView");
         }
@@ -48,6 +51,7 @@ namespace VersionController.Main.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+            _logger.Information($"It is at {nameof(MainViewModel)}.{nameof(OnNavigatedFrom)} now.");
         }
     }
 }

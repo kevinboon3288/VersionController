@@ -8,33 +8,30 @@ using System.Threading.Tasks;
 
 namespace VersionController.Core
 {
-    public class DirectoryUtils
+    public class DirectoryUtils : IDirectoryUtils
     {
         private readonly ILogger _logger;
         private const string _nugetPackagesPath = @"\Microsoft SDKs\NuGetPackages";
-        private const string _iconResourcePath = @"/Resource;component/Resources/Icons/";
         private const string _folderPattern = @"(?<=\..*)\.";
-        private string _filterFileNames = String.Empty;
 
-        public DirectoryUtils(ILogger logger, string filterFileNames)
+        public DirectoryUtils(ILogger logger)
         {
             _logger = logger;
-            _filterFileNames = filterFileNames;
         }
 
-        public List<Folder> GetFilterFolders()
+        public List<string> GetPackages() 
         {
-            List<Folder> folders = new List<Folder>();
+            List<string> folders = new();
 
             string nugetPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + _nugetPackagesPath;
-            string[] filterFolderPaths = Directory.GetDirectories(nugetPath, _filterFileNames);
+            string[] filterFolderPaths = Directory.GetDirectories(nugetPath);
 
             foreach (string folder in filterFolderPaths)
             {
                 Match match = Regex.Match(folder, _folderPattern);
                 if (match.Success)
                 {
-                    folders.Add(new Folder(Path.GetFileName(folder.Substring(match.Index + 1).ToUpper()), _iconResourcePath + "Fail16x16.png"));
+                    folders.Add(Path.GetFileName(folder.Substring(match.Index + 1).ToUpper()));
                 }
             }
 
@@ -43,7 +40,28 @@ namespace VersionController.Core
             return folders;
         }
 
-        public void Delete()
+        public List<string> GetFilterPackages(string filterFileNames)
+        {
+            List<string> folders = new();
+
+            string nugetPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + _nugetPackagesPath;
+            string[] filterFolderPaths = Directory.GetDirectories(nugetPath, filterFileNames);
+
+            foreach (string folder in filterFolderPaths)
+            {
+                Match match = Regex.Match(folder, _folderPattern);
+                if (match.Success)
+                {
+                    folders.Add(Path.GetFileName(folder.Substring(match.Index + 1).ToUpper()));
+                }
+            }
+
+            _logger.Information("Folders loaded successfully");
+
+            return folders;
+        }
+
+        public void Delete(string filterFileNames)
         {
             string programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
             string nugetPackagesPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -63,7 +81,7 @@ namespace VersionController.Core
                         return;
                     }
 
-                    DirectoryInfo[] nugetFolders = directory.GetDirectories(_filterFileNames, SearchOption.AllDirectories);
+                    DirectoryInfo[] nugetFolders = directory.GetDirectories(filterFileNames, SearchOption.AllDirectories);
 
                     Parallel.ForEach(nugetFolders, nugetFolder =>
                     {

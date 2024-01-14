@@ -46,4 +46,63 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="Height" Value="100px"/>
     </Style>
+
+    <Style x:Key="IconToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="ToggleButtonBorder" 
+                            BorderThickness="1"
+                            Background="Transparent">
+                        <Image x:Name="ToggleButtonImage"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"  
+                               Source="pack://application:,,,/Resource;component/Icons/Unchecked32x32.png"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="ToggleButtonImage" Property="Source" Value="pack://application:,,,/Resource;component/Icons/Checked32x32.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="IconButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+    </Style>
+
+    <Style x:Key="DeleteIconButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border>
+                        <Image x:Name="ToggleButtonImage"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"  
+                               Source="pack://application:,,,/Resource;component/Icons/Delete16x16.png"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PublishIconButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border>
+                        <Image x:Name="ToggleButtonImage"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"  
+                               Source="pack://application:,,,/Resource;component/Icons/Upload16x16.png"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

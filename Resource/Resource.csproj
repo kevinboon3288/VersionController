@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\Checked32x32.png" />
     <None Remove="Icons\Delete16x16.png" />
     <None Remove="Icons\Done16x16.png" />
     <None Remove="Icons\Fail16x16.png" />
+    <None Remove="Icons\Unchecked32x32.png" />
     <None Remove="Icons\Upload16x16.png" />
     <None Remove="Images\Choose.gif" />
     <None Remove="Images\Destruction.gif" />
@@ -18,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Icons\Checked32x32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\Delete16x16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -25,6 +30,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Fail16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Unchecked32x32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Upload16x16.png">

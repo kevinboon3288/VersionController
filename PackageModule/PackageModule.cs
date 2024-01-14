@@ -3,6 +3,7 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 using Serilog;
+using System.Windows.Input;
 using VersionController.PackageModule.ViewModels;
 using VersionController.PackageModule.Views;
 
@@ -22,6 +23,9 @@ namespace VersionController.PackageModule
         public void OnInitialized(IContainerProvider containerProvider)
         {
             _regionManager.RegisterViewWithRegion("PackageListContentRegion", typeof(PackageListView));
+            
+            IRegion region = _regionManager.Regions["PackageListContentRegion"];
+            region.RequestNavigate(nameof(PackageListView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

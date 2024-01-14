@@ -1,18 +1,14 @@
 ﻿using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Unity;
 using Serilog;
 using Serilog.Core;
 using System.Windows;
 using Unity;
-using VersionController.Main.Views;
-using VersionController.Main.ViewModels;
 using VersionController.Services;
-using VersionController.PackageModule.Views;
-using VersionController.PackageModule.ViewModels;
+using VersionController.Core;
 
 namespace VersionController
 {
@@ -31,7 +27,7 @@ namespace VersionController
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //TODO: Register interface and its class
-            //containerRegistry.Register<IDirectoryUtils, DirectoryUtils>();
+            containerRegistry.Register<IDirectoryUtils, DirectoryUtils>();
 
             IEventAggregator eventAggregator = containerRegistry.GetContainer().Resolve<IEventAggregator>();
             ILogEventSink logControlSink = new LogSink(eventAggregator);
@@ -42,9 +38,6 @@ namespace VersionController
                 .CreateLogger());
 
             _regionManager = containerRegistry.GetContainer().Resolve<IRegionManager>();
-
-            containerRegistry.RegisterForNavigation<MainView>();
-            containerRegistry.RegisterForNavigation<PackageListView>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -55,10 +48,6 @@ namespace VersionController
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();
-
-            //TODO: Register New Added View and ViewModel at ViewModelLocationProvider
-            ViewModelLocationProvider.Register<PackageListView, PackageListViewModel>();
-            ViewModelLocationProvider.Register<MainView, MainViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
