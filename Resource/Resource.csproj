@@ -7,7 +7,41 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Icons\" />
+    <None Remove="Icons\Delete16x16.png" />
+    <None Remove="Icons\Done16x16.png" />
+    <None Remove="Icons\Fail16x16.png" />
+    <None Remove="Icons\Upload16x16.png" />
+    <None Remove="Images\Choose.gif" />
+    <None Remove="Images\Destruction.gif" />
+    <None Remove="Images\Rebuild.gif" />
+    <None Remove="Images\Upload.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\Delete16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Done16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Fail16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Upload16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Choose.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Destruction.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Rebuild.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Upload.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
