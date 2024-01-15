@@ -48,8 +48,6 @@
     </Style>
 
     <Style x:Key="IconToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="Height" Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -69,6 +67,17 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <Style x:Key="AllPackageIconToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource IconToggleButtonStyle}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>    
+    
+    <Style x:Key="PackageIconToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource IconToggleButtonStyle}">
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Height" Value="18"/>
     </Style>
 
     <Style x:Key="IconButtonStyle" TargetType="{x:Type Button}">

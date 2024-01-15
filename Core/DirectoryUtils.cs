@@ -11,7 +11,6 @@ namespace VersionController.Core
     public class DirectoryUtils : IDirectoryUtils
     {
         private readonly ILogger _logger;
-        private const string _nugetPackagesPath = @"\Microsoft SDKs\NuGetPackages";
         private const string _folderPattern = @"(?<=\..*)\.";
 
         public DirectoryUtils(ILogger logger)
@@ -21,31 +20,18 @@ namespace VersionController.Core
 
         public List<string> GetPackages() 
         {
-            List<string> folders = new();
-
-            string nugetPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + _nugetPackagesPath;
-            string[] filterFolderPaths = Directory.GetDirectories(nugetPath);
-
-            foreach (string folder in filterFolderPaths)
-            {
-                Match match = Regex.Match(folder, _folderPattern);
-                if (match.Success)
-                {
-                    folders.Add(Path.GetFileName(folder.Substring(match.Index + 1).ToUpper()));
-                }
-            }
-
-            _logger.Information("Folders loaded successfully");
-
-            return folders;
+            _logger.Information(ConstantFilePaths.NugetX86FilePath);
+            return ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
         }
 
         public List<string> GetFilterPackages(string filterFileNames)
+        {           
+            return ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath, filterFileNames));
+        }
+
+        private List<string> ReadPackages(string[] filterFolderPaths) 
         {
             List<string> folders = new();
-
-            string nugetPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + _nugetPackagesPath;
-            string[] filterFolderPaths = Directory.GetDirectories(nugetPath, filterFileNames);
 
             foreach (string folder in filterFolderPaths)
             {
@@ -63,13 +49,10 @@ namespace VersionController.Core
 
         public void Delete(string filterFileNames)
         {
-            string programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            string nugetPackagesPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
             DirectoryInfo[] directories = new[]
             {
-                new DirectoryInfo(programFilesPath + @"\Microsoft SDKs\NuGetPackages"),
-                new DirectoryInfo(nugetPackagesPath + @"\.nuget\packages")
+                new DirectoryInfo(ConstantFilePaths.NugetX86FilePath),
+                new DirectoryInfo(ConstantFilePaths.DotNugetFilePath)
             };
 
             Task.Run(() =>
@@ -87,7 +70,6 @@ namespace VersionController.Core
                     {
                         try
                         {
-                            //TODO: Add log to track which directory is on-delete.
                             Directory.Delete(nugetFolder.FullName, true);
                             _logger.Information($"{nugetFolder.FullName} delete successfully");
                         }
