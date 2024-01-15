@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -20,13 +21,13 @@ namespace VersionController.Core
 
         public List<string> GetPackages() 
         {
-            _logger.Information(ConstantFilePaths.NugetX86FilePath);
             return ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
         }
 
         public List<string> GetFilterPackages(string filterFileNames)
         {           
-            return ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath, filterFileNames));
+            List<string> packages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
+            return packages.FindAll(x => x.Contains(filterFileNames.ToUpper())).ToList();
         }
 
         private List<string> ReadPackages(string[] filterFolderPaths) 

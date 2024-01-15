@@ -18,11 +18,18 @@ namespace VersionController.PackageModule.ViewModels
         private ObservableCollection<Package> _packages = new();
         private Package _selectedPackage = new();
         private bool _isVisible = new();
+        private string _token = string.Empty;
 
         public ObservableCollection<Package> Packages
         {
             get => _packages;
             set { SetProperty(ref _packages, value); }
+        }
+
+        public string Token
+        {
+            get => _token;
+            set { SetProperty(ref _token, value); }
         }
 
         // TODO: Handle the selected package in the list properly
@@ -82,6 +89,7 @@ namespace VersionController.PackageModule.ViewModels
         {
             if (string.IsNullOrEmpty(token)) 
             {
+                Refresh();
                 return;
             }
 

@@ -72,6 +72,7 @@
     <Style x:Key="AllPackageIconToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource IconToggleButtonStyle}">
         <Setter Property="Width" Value="20"/>
         <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="10,0"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>    
     
@@ -80,12 +81,9 @@
         <Setter Property="Height" Value="18"/>
     </Style>
 
-    <Style x:Key="IconButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="DeleteIconButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
-    </Style>
-
-    <Style x:Key="DeleteIconButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -100,7 +98,9 @@
         </Setter>
     </Style>
 
-    <Style x:Key="PublishIconButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
+    <Style x:Key="PublishIconButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -110,6 +110,41 @@
                                VerticalAlignment="Center"  
                                Source="pack://application:,,,/Resource;component/Icons/Upload16x16.png"/>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SearchTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="SearchTextBoxBorder"
+                            BorderThickness="1"
+                            BorderBrush="Black"
+                            CornerRadius="3"
+                            Background="White">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="SearchIcon"
+                                   Source="pack://application:,,,/Resource;component/Icons/Search30x30.png"
+                                   Margin="10,0,0,0"
+                                   Width="18"
+                                   Height="18"
+                                   Visibility="Collapsed"/>
+                            <TextBlock x:Name="SerachTokenText"
+                                       Text="{TemplateBinding Text}" 
+                                       FontFamily="Sora" 
+                                       FontSize="12"
+                                       Margin="10,0,0,0"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="SearchIcon" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="SerachTokenText" Property="Text" Value="Search"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
