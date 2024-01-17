@@ -17,7 +17,8 @@ namespace VersionController.PackageModule.ViewModels
 
         private ObservableCollection<Package> _packages = new();
         private Package _selectedPackage = new();
-        private bool _isVisible = new();
+        private bool _isVisible = false;
+        private bool _isAllChecked = false;
         private string _token = string.Empty;
 
         public ObservableCollection<Package> Packages
@@ -29,7 +30,14 @@ namespace VersionController.PackageModule.ViewModels
         public string Token
         {
             get => _token;
-            set { SetProperty(ref _token, value); }
+            set 
+            { 
+                SetProperty(ref _token, value);
+                if (string.IsNullOrEmpty(_token)) 
+                { 
+                    Refresh();
+                }
+            }
         }
 
         // TODO: Handle the selected package in the list properly
@@ -44,11 +52,21 @@ namespace VersionController.PackageModule.ViewModels
                     Package? package = Packages.ToList().FirstOrDefault(x => x.Name == _selectedPackage.Name);
                     if (package != null) 
                     { 
-                        package.IsChecked = _selectedPackage.IsChecked;                  
+                        package.IsChecked = !_selectedPackage.IsChecked;                  
                     }
                 }
 
                 IsVisible = Packages.Any(x => x.IsChecked);
+            }
+        }
+
+        public bool IsAllChecked
+        {
+            get => _isAllChecked;
+            set 
+            { 
+                SetProperty(ref _isAllChecked, value);
+                Packages.ToList().ForEach(x => x.IsChecked = _isAllChecked);
             }
         }
 
@@ -59,6 +77,8 @@ namespace VersionController.PackageModule.ViewModels
         }
 
         public DelegateCommand<string> SearchCommand { get; set; }
+        public DelegateCommand DeleteCommand { get; set; }
+        public DelegateCommand PublishCommand { get; set; }
 
         public PackageListViewModel(ILogger logger, IDirectoryUtils directoryUtils)
         {
@@ -66,6 +86,8 @@ namespace VersionController.PackageModule.ViewModels
             _directoryUtils = directoryUtils;
 
             SearchCommand = new DelegateCommand<string>(OnSearch);
+            DeleteCommand = new DelegateCommand(OnDelete);
+            PublishCommand = new DelegateCommand(OnPublish);
         }
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
@@ -89,7 +111,6 @@ namespace VersionController.PackageModule.ViewModels
         {
             if (string.IsNullOrEmpty(token)) 
             {
-                Refresh();
                 return;
             }
 
@@ -101,6 +122,31 @@ namespace VersionController.PackageModule.ViewModels
             {
                 Packages.Add(new Package(filterPackage));
             }
+        }
+
+        private void OnDelete() 
+        {
+            if (!Packages.Any(x => x.IsChecked)) 
+            {
+                return;
+            }
+
+            List<string> deletePackages = new();
+
+            foreach (Package package in Packages) 
+            {
+                if (package.IsChecked) 
+                {
+                    deletePackages.Add(package.Name);
+                }
+            }
+
+            _directoryUtils.Delete(deletePackages);                     
+        }
+
+        private void OnPublish() 
+        { 
+            //TODO: Implement the publish feature
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

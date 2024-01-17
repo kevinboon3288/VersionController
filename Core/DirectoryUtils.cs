@@ -21,12 +21,12 @@ namespace VersionController.Core
 
         public List<string> GetPackages() 
         {
-            return ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
+            return ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
         }
 
         public List<string> GetFilterPackages(string filterFileNames)
         {           
-            List<string> packages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
+            List<string> packages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
             return packages.FindAll(x => x.Contains(filterFileNames.ToUpper())).ToList();
         }
 
@@ -39,7 +39,7 @@ namespace VersionController.Core
                 Match match = Regex.Match(folder, _folderPattern);
                 if (match.Success)
                 {
-                    folders.Add(Path.GetFileName(folder.Substring(match.Index + 1).ToUpper()));
+                    folders.Add(Path.GetFileName(folder));
                 }
             }
 
@@ -48,7 +48,7 @@ namespace VersionController.Core
             return folders;
         }
 
-        public void Delete(string filterFileNames)
+        public void Delete(List<string> filterFileNames)
         {
             DirectoryInfo[] directories = new[]
             {
@@ -58,21 +58,22 @@ namespace VersionController.Core
 
             Task.Run(() =>
             {
-                Parallel.ForEach(directories, directory =>
+                foreach (DirectoryInfo directory in directories)
                 {
                     if (!directory.Exists)
                     {
                         return;
                     }
 
-                    DirectoryInfo[] nugetFolders = directory.GetDirectories(filterFileNames, SearchOption.AllDirectories);
-
-                    Parallel.ForEach(nugetFolders, nugetFolder =>
+                    Parallel.ForEach(directory.GetDirectories(), nugetFolder =>
                     {
                         try
                         {
-                            Directory.Delete(nugetFolder.FullName, true);
-                            _logger.Information($"{nugetFolder.FullName} delete successfully");
+                            if (filterFileNames.Any(x => x.Equals(nugetFolder.Name)))
+                            {
+                                Directory.Delete(nugetFolder.FullName, true);
+                                _logger.Information($"{nugetFolder.FullName} delete successfully");
+                            }
                         }
                         catch (IOException ex)
                         {
@@ -83,9 +84,8 @@ namespace VersionController.Core
                             _logger.Error($"Unable to delete because file is access denied : {ex.Message}");
                         }
                     });
-                });
-
-            });
+                }
+            }).Await();
 
             _logger.Information("Deleted all folder in .nuget and NugetPackages directory");
         }

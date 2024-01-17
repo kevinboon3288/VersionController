@@ -32,11 +32,13 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ToggleButton Grid.Column="0" Style="{StaticResource AllPackageIconToggleButtonStyle}"/>
+            <ToggleButton Grid.Column="0" IsChecked="{Binding IsAllChecked}" Style="{StaticResource AllPackageIconToggleButtonStyle}"/>
             <Button Grid.Column="2" Style="{StaticResource PublishIconButtonStyle}"
-                    Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+                    Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding PublishCommand}"/>
             <Button Grid.Column="3" Style="{StaticResource DeleteIconButtonStyle}"
-                    Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+                    Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding DeleteCommand}"/>
         </Grid>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
             <TextBox Text="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40px" Width="180px" Style="{StaticResource SearchTextBox}">
@@ -46,7 +48,7 @@
             </TextBox>
         </StackPanel>
         <ListBox Grid.Row="2" ItemsSource="{Binding Packages, Mode=OneWay}" 
-                 SelectedItem="{Binding SelectedPackage}"
+                 SelectedItem="{Binding SelectedPackage}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Margin="10">
             <ListBox.ItemsPanel>

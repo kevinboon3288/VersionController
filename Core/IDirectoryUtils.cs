@@ -7,7 +7,7 @@ namespace VersionController.Core
     {
         List<string> GetPackages();
         List<string> GetFilterPackages(string filterFileNames);
-        void Delete(string filterFileNames);
+        void Delete(List<string> filterFileNames);
         void Publish(string directory, string fileName);
     }
 }
