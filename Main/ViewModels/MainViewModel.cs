@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using Serilog;
 using System;
+using VersionController.PackageModule.ViewModels;
 using VersionController.Services.Events;
 
 namespace VersionController.Main.ViewModels

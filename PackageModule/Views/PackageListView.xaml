@@ -4,11 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VersionController.PackageModule.Views"
+             xmlns:converter="clr-namespace:VersionController.Controls.Converter"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resource;component/ControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:VisibilityConverter x:Key="visibilityConverter"></converter:VisibilityConverter>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid Background="AliceBlue" Width="200px" Margin="5px">
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="50px">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton Grid.Column="0" IsChecked="{Binding IsAllChecked}" Style="{StaticResource AllPackageIconToggleButtonStyle}"/>
+            <Button Grid.Column="2" Style="{StaticResource PublishIconButtonStyle}"
+                    Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding PublishCommand}"/>
+            <Button Grid.Column="3" Style="{StaticResource DeleteIconButtonStyle}"
+                    Visibility="{Binding IsVisible, Converter={StaticResource visibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding DeleteCommand}"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+            <TextBox Text="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40px" Width="180px" Style="{StaticResource SearchTextBox}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SearchCommand}" CommandParameter="{Binding Token}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+        </StackPanel>
+        <ListBox Grid.Row="2" ItemsSource="{Binding Packages, Mode=OneWay}" 
+                 SelectedItem="{Binding SelectedPackage}" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Margin="10">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel CanVerticallyScroll="True" CanHorizontallyScroll="False"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*" MaxWidth="180px"/>
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Grid.Column="0" IsChecked="{Binding Path=IsChecked}" Style="{StaticResource PackageIconToggleButtonStyle}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Name}" TextWrapping="NoWrap" ToolTip="{Binding Path=Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

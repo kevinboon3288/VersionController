@@ -5,8 +5,6 @@ using Prism.Regions;
 using Serilog;
 using VersionController.Main.ViewModels;
 using VersionController.Main.Views;
-using VersionController.PackageModule.ViewModels;
-using VersionController.PackageModule.Views;
 
 namespace VersionController.Main
 {
