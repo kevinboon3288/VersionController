@@ -24,6 +24,7 @@ namespace VersionController.PackageModule
         {
             _regionManager.RegisterViewWithRegion("PackageListContentRegion", typeof(PackageListView));
             
+            //TODO: Update this implementation if there is a better way for first navigation
             IRegion region = _regionManager.Regions["PackageListContentRegion"];
             region.RequestNavigate(nameof(PackageListView));
         }

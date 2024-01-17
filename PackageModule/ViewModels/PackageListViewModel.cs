@@ -40,7 +40,6 @@ namespace VersionController.PackageModule.ViewModels
             }
         }
 
-        // TODO: Handle the selected package in the list properly
         public Package SelectedPackage
         {
             get => _selectedPackage;

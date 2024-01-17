@@ -38,8 +38,6 @@ namespace VersionController.Main.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            _logger.Information($"It is at {nameof(MainViewModel)}.{nameof(OnNavigatedTo)} now.");
-
             IRegion region = _regionManager.Regions["PackageListContentRegion"];
             region.RequestNavigate("PackageListView");
         }
@@ -51,7 +49,6 @@ namespace VersionController.Main.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            _logger.Information($"It is at {nameof(MainViewModel)}.{nameof(OnNavigatedFrom)} now.");
         }
     }
 }
