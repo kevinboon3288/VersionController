@@ -22,7 +22,7 @@ namespace VersionController.Services
 
             StringWriter strWriter = new();
 
-            MessageTemplateTextFormatter textFormatter = new MessageTemplateTextFormatter("{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}]: {Message}{Exception}");
+            MessageTemplateTextFormatter textFormatter = new MessageTemplateTextFormatter("{Timestamp:yyyy/MM/dd HH:mm:ss} [{Level:u3}]: {Message}{Exception}");
             textFormatter.Format(logEvent, strWriter);
 
             _eventAggregator.GetEvent<Events.LogEvent>().Publish(strWriter.ToString());
