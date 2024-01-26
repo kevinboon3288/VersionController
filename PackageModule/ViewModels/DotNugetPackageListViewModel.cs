@@ -10,63 +10,63 @@ using VersionController.PackageModule.Models;
 
 namespace VersionController.PackageModule.ViewModels
 {
-    public class PackageListViewModel : BindableBase, INavigationAware
+    public class DotNugetPackageListViewModel : BindableBase, INavigationAware
     {
         private readonly ILogger _logger;
         private readonly IDirectoryUtils _directoryUtils;
 
-        private ObservableCollection<Package> _packages = new();
-        private Package _selectedPackage = new();
+        private ObservableCollection<Package> _dotNuGetPackages = new();
+        private Package _selectedDotNugetPackage = new();
         private bool _isVisible = false;
         private bool _isAllChecked = false;
-        private string _token = string.Empty;
+        private string _dotNugetPackageToken = string.Empty;
 
-        public ObservableCollection<Package> Packages
+        public ObservableCollection<Package> DotNuGetPackages
         {
-            get => _packages;
-            set { SetProperty(ref _packages, value); }
+            get => _dotNuGetPackages;
+            set { SetProperty(ref _dotNuGetPackages, value); }
         }
 
-        public string Token
+        public string DotNugetPackageToken
         {
-            get => _token;
-            set 
-            { 
-                SetProperty(ref _token, value);
-                if (string.IsNullOrEmpty(_token)) 
-                { 
+            get => _dotNugetPackageToken;
+            set
+            {
+                SetProperty(ref _dotNugetPackageToken, value);
+                if (string.IsNullOrEmpty(_dotNugetPackageToken))
+                {
                     Refresh();
                 }
             }
         }
 
-        public Package SelectedPackage
+        public Package SelectedDotNuGetPackage
         {
-            get => _selectedPackage;
-            set 
-            { 
-                SetProperty(ref _selectedPackage, value); 
-                if(_selectedPackage != null) 
+            get => _selectedDotNugetPackage;
+            set
+            {
+                SetProperty(ref _selectedDotNugetPackage, value);
+                if (_dotNuGetPackages != null)
                 {
-                    Package? package = Packages.ToList().FirstOrDefault(x => x.Name == _selectedPackage.Name);
-                    if (package != null) 
-                    { 
-                        package.IsChecked = !_selectedPackage.IsChecked;                  
+                    Package? package = DotNuGetPackages.ToList().FirstOrDefault(x => x.Name == _selectedDotNugetPackage.Name);
+                    if (package != null)
+                    {
+                        package.IsChecked = !_selectedDotNugetPackage.IsChecked;
                     }
                 }
 
-                IsVisible = Packages.Any(x => x.IsChecked);
+                IsVisible = DotNuGetPackages.Any(x => x.IsChecked);
             }
         }
 
         public bool IsAllChecked
         {
             get => _isAllChecked;
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _isAllChecked, value);
-                Packages.ToList().ForEach(x => x.IsChecked = _isAllChecked);
-                IsVisible = Packages.Any(x => x.IsChecked);
+                DotNuGetPackages.ToList().ForEach(x => x.IsChecked = _isAllChecked);
+                IsVisible = DotNuGetPackages.Any(x => x.IsChecked);
             }
         }
 
@@ -80,7 +80,7 @@ namespace VersionController.PackageModule.ViewModels
         public DelegateCommand DeleteCommand { get; set; }
         public DelegateCommand PublishCommand { get; set; }
 
-        public PackageListViewModel(ILogger logger, IDirectoryUtils directoryUtils)
+        public DotNugetPackageListViewModel(ILogger logger, IDirectoryUtils directoryUtils)
         {
             _logger = logger;
             _directoryUtils = directoryUtils;
@@ -98,36 +98,36 @@ namespace VersionController.PackageModule.ViewModels
         private void Refresh() 
         {
             IsVisible = false;
-            Packages.Clear();
+            DotNuGetPackages.Clear();
 
-            List<string> packages = _directoryUtils.GetNugetPackages();
+            List<string> dotNuGetPackages = _directoryUtils.GetDotNugetPackages();
 
-            foreach (string package in packages) 
+            foreach (string package in dotNuGetPackages)
             {
-                Packages.Add(new Package(package));
-            } 
+                DotNuGetPackages.Add(new Package(package));
+            }
         }
 
         private void OnSearch(string token) 
         {
-            if (string.IsNullOrEmpty(token)) 
+            if (string.IsNullOrEmpty(token))
             {
                 return;
             }
 
-            Packages.Clear();
+            DotNuGetPackages.Clear();
 
             List<string> filterPackages = _directoryUtils.GetFilterPackages(token);
 
-            foreach (string filterPackage in filterPackages) 
+            foreach (string filterPackage in filterPackages)
             {
-                Packages.Add(new Package(filterPackage));
+                DotNuGetPackages.Add(new Package(filterPackage));
             }
         }
 
-        private void OnDelete() 
+        private void OnDelete()
         {
-            if (!Packages.Any(x => x.IsChecked)) 
+            if (!DotNuGetPackages.Any(x => x.IsChecked))
             {
                 _logger.Warning("Unable to delete the packages due to no package is selected.");
                 return;
@@ -135,20 +135,20 @@ namespace VersionController.PackageModule.ViewModels
 
             List<string> deletePackages = new();
 
-            foreach (Package package in Packages) 
+            foreach (Package package in DotNuGetPackages)
             {
-                if (package.IsChecked) 
+                if (package.IsChecked)
                 {
                     deletePackages.Add(package.Name);
                 }
             }
 
-            _directoryUtils.Delete(deletePackages, ConstantFilePaths.NugetX86FilePath);                     
+            _directoryUtils.Delete(deletePackages, ConstantFilePaths.DotNugetFilePath);
         }
 
-        private void OnPublish() 
-        { 
-            //TODO: Implement the publish feature
+        private void OnPublish()
+        {
+            //TODO: Add logic to OnPublish method
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

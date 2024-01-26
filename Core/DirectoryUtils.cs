@@ -19,9 +19,22 @@ namespace VersionController.Core
             _logger = logger;
         }
 
-        public List<string> GetPackages() 
+        public List<string> GetNugetPackages()
         {
-            return ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
+            List<string> nugetPackages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
+            
+            _logger.Information("NuGetPackages Folders loaded successfully");
+
+            return nugetPackages;
+        }
+
+        public List<string> GetDotNugetPackages() 
+        {
+            List<string> dotNugetPackages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
+
+            _logger.Information(".nuget Folders loaded successfully");
+
+            return dotNugetPackages;
         }
 
         public List<string> GetFilterPackages(string filterFileNames)
@@ -41,50 +54,41 @@ namespace VersionController.Core
                 {
                     folders.Add(Path.GetFileName(folder));
                 }
-            }
-
-            _logger.Information("Folders loaded successfully");
+            }            
 
             return folders;
         }
 
-        public void Delete(List<string> filterFileNames)
+        public void Delete(List<string> filterFileNames, string filePath)
         {
-            DirectoryInfo[] directories = new[]
-            {
-                new DirectoryInfo(ConstantFilePaths.NugetX86FilePath),
-                new DirectoryInfo(ConstantFilePaths.DotNugetFilePath)
-            };
-
             Task.Run(() =>
             {
-                foreach (DirectoryInfo directory in directories)
+                DirectoryInfo directory = new DirectoryInfo(filePath);
+                if (!directory.Exists)
                 {
-                    if (!directory.Exists)
-                    {
-                        return;
-                    }
-
-                    Parallel.ForEach(directory.GetDirectories(), nugetFolder =>
-                    {
-                        try
-                        {
-                            if (filterFileNames.Any(x => x.Equals(nugetFolder.Name)))
-                            {
-                                Directory.Delete(nugetFolder.FullName, true);
-                                _logger.Information($"{nugetFolder.FullName} delete successfully");
-                            }
-                        }
-                        catch (IOException ex)
-                        {
-                            _logger.Error($"Unable to delete because file in used : {ex.Message}");
-                        }
-                        catch (UnauthorizedAccessException ex)
-                        {
-                            _logger.Error($"Unable to delete because file is access denied : {ex.Message}");
-                        }
-                    });
+                    _logger.Warning($"{directory.Name} is not existed.");
+                    return;
                 }
+
+                Parallel.ForEach(directory.GetDirectories(), nugetFolder =>
+                {
+                    try
+                    {
+                        if (filterFileNames.Any(x => x.Equals(nugetFolder.Name)))
+                        {
+                            Directory.Delete(nugetFolder.FullName, true);
+                            _logger.Information($"{nugetFolder.FullName} delete successfully");
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        _logger.Error($"{nugetFolder.Name} unable to delete because file in used : {ex.Message}");
+                    }
+                    catch (UnauthorizedAccessException ex)
+                    {
+                        _logger.Error($"{nugetFolder.Name} unable to delete because file is access denied : {ex.Message}");
+                    }
+                });
             }).Await();
 
             _logger.Information("Deleted all folder in .nuget and NugetPackages directory");
