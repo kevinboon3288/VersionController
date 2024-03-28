@@ -19,40 +19,42 @@ namespace VersionController.Core
             _logger = logger;
         }
 
-        public List<string> GetNugetPackages()
+        public List<(string, string?)> GetNugetPackages()
         {
-            List<string> nugetPackages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
+            List<(string, string?)> nugetPackages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
             
             _logger.Information("NuGetPackages Folders loaded successfully");
 
             return nugetPackages;
         }
 
-        public List<string> GetDotNugetPackages() 
+        public List<(string, string?)> GetDotNugetPackages() 
         {
-            List<string> dotNugetPackages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
+            List<(string, string?)> dotNugetPackages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
 
             _logger.Information(".nuget Folders loaded successfully");
 
             return dotNugetPackages;
         }
 
-        public List<string> GetFilterPackages(string filterFileNames)
-        {           
-            List<string> packages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
-            return packages.FindAll(x => x.Contains(filterFileNames.ToUpper())).ToList();
+        public List<(string, string?)> GetFilterPackages(string filterFileNames)
+        {
+            List<(string fileName, string? version)> packages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
+            return packages.FindAll(x => x.fileName.Contains(filterFileNames.ToUpper())).ToList();
         }
 
-        private List<string> ReadPackages(string[] filterFolderPaths) 
+        private List<(string, string?)> ReadPackages(string[] filterFolderPaths) 
         {
-            List<string> folders = new();
+            List<(string, string?)> folders = new();
 
             foreach (string folder in filterFolderPaths)
             {
+                string? version = Path.GetFileName(Directory.GetDirectories(folder, "*", SearchOption.TopDirectoryOnly).FirstOrDefault());
+
                 Match match = Regex.Match(folder, _folderPattern);
                 if (match.Success)
                 {
-                    folders.Add(Path.GetFileName(folder));
+                    folders.Add((Path.GetFileName(folder), version));
                 }
             }            
 

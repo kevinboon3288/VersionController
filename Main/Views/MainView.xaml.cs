@@ -30,7 +30,7 @@ namespace VersionController.Main.Views
             vm.LogReceived += OnLogReceived;
         }
 
-        private void OnLogReceived(object sender, EventArgs e)
+        private void OnLogReceived(object? sender, EventArgs e)
         {
             if (e is LogEventArgs eventArgs)
             {

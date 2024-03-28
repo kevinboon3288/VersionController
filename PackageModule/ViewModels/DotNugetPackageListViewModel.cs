@@ -100,11 +100,11 @@ namespace VersionController.PackageModule.ViewModels
             IsVisible = false;
             DotNuGetPackages.Clear();
 
-            List<string> dotNuGetPackages = _directoryUtils.GetDotNugetPackages();
+            List<(string, string?)> dotNuGetPackages = _directoryUtils.GetDotNugetPackages();
 
-            foreach (string package in dotNuGetPackages)
+            foreach ((string package, string? version) in dotNuGetPackages)
             {
-                DotNuGetPackages.Add(new Package(package));
+                DotNuGetPackages.Add(new Package(package, version));
             }
         }
 
@@ -117,11 +117,11 @@ namespace VersionController.PackageModule.ViewModels
 
             DotNuGetPackages.Clear();
 
-            List<string> filterPackages = _directoryUtils.GetFilterPackages(token);
+            List<(string, string?)> filterPackages = _directoryUtils.GetFilterPackages(token);
 
-            foreach (string filterPackage in filterPackages)
+            foreach ((string filterPackage, string? version) in filterPackages)
             {
-                DotNuGetPackages.Add(new Package(filterPackage));
+                DotNuGetPackages.Add(new Package(filterPackage, version));
             }
         }
 
