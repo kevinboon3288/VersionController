@@ -100,11 +100,11 @@ namespace VersionController.PackageModule.ViewModels
             IsVisible = false;
             Packages.Clear();
 
-            List<string> packages = _directoryUtils.GetNugetPackages();
+            List<(string, string?)> packages = _directoryUtils.GetNugetPackages();
 
-            foreach (string package in packages) 
+            foreach ((string fileName, string? version) in packages) 
             {
-                Packages.Add(new Package(package));
+                Packages.Add(new Package(fileName, version));
             } 
         }
 
@@ -117,11 +117,11 @@ namespace VersionController.PackageModule.ViewModels
 
             Packages.Clear();
 
-            List<string> filterPackages = _directoryUtils.GetFilterPackages(token);
+            List<(string, string?)> filterPackages = _directoryUtils.GetFilterPackages(token);
 
-            foreach (string filterPackage in filterPackages) 
+            foreach ((string filterPackage, string? version) in filterPackages) 
             {
-                Packages.Add(new Package(filterPackage));
+                Packages.Add(new Package(filterPackage, version));
             }
         }
 

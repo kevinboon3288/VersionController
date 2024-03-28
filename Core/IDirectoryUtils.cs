@@ -4,9 +4,9 @@ namespace VersionController.Core
 {
     public interface IDirectoryUtils
     {
-        List<string> GetNugetPackages();
-        List<string> GetDotNugetPackages();
-        List<string> GetFilterPackages(string filterFileNames);
+        List<(string, string?)> GetNugetPackages();
+        List<(string, string?)> GetDotNugetPackages();
+        List<(string, string?)> GetFilterPackages(string filterFileNames);
         void Delete(List<string> filterFileNames, string filePath);
         void Publish(string directory, string fileName);
     }
