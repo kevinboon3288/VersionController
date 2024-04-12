@@ -2,17 +2,25 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>default</LangVersion>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <Product>Version Controller</Product>
     <Authors>Tan Chee Boon</Authors>
-    <Copyright>Copyright @ 2023</Copyright>
+    <Copyright>Copyright @ 2024</Copyright>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Common\**" />
+    <Compile Remove="Modules\**" />
     <Compile Remove="Resource\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="Modules\**" />
     <EmbeddedResource Remove="Resource\**" />
+    <None Remove="Common\**" />
+    <None Remove="Modules\**" />
     <None Remove="Resource\**" />
+    <Page Remove="Common\**" />
+    <Page Remove="Modules\**" />
     <Page Remove="Resource\**" />
   </ItemGroup>
   <ItemGroup>
@@ -21,6 +29,9 @@
     <PackageReference Include="Serilog" Version="3.1.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Common\CommonModule\CommonModule.csproj" />
+    <ProjectReference Include="Modules\MainModule\MainModule.csproj" />
+    <ProjectReference Include="Modules\PackageModule\PackageModule.csproj" />
     <ProjectReference Include="Resource\Resource.csproj" />
   </ItemGroup>
 </Project>

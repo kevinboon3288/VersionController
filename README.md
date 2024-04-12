@@ -1,11 +1,10 @@
 # Version Controller 
 ## Introduction
-This application is designed for the developers to have CRUD operations on publishing local NuGet Packages. 
-It is a WPF project using MVVM architecture design and Prism Library as a framework.
+This application is designed for the developers to manage the local NuGet Packages during the integration process. It is a WPF project using MVVM architecture design and Prism Library as a framework.
 
 ## Languages & Technologies Used
 - WPF
-- .NET 6.0
+- .NET 8.0
 - C#
 - Prism
 - MVVM

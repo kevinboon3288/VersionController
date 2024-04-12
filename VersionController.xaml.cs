@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-using VersionController.Main.ViewModels;
-using VersionController.Services.Events;
+﻿using System.Windows;
 
 namespace VersionController
 {
