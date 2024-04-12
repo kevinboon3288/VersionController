@@ -1,4 +1,6 @@
-﻿using Prism.Events;
+﻿using CommonModule.Core;
+using PackageModule.Core;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -7,8 +9,6 @@ using Serilog;
 using Serilog.Core;
 using System.Windows;
 using Unity;
-using VersionController.Services;
-using VersionController.Core;
 
 namespace VersionController
 {
@@ -52,7 +52,7 @@ namespace VersionController
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<Main.MainModule>();
+            moduleCatalog.AddModule<MainModule.MainModule>();
             moduleCatalog.AddModule<PackageModule.PackageModule>();
         }
 
