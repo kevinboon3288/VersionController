@@ -34,9 +34,9 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <ToggleButton Grid.Column="0" IsChecked="{Binding IsAllChecked}" Style="{StaticResource AllPackageIconToggleButtonStyle}"/>
-            <TextBox Grid.Column="1" Text="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchTextBox}">
+            <TextBox Grid.Column="1" Text="{Binding NugetToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchTextBox}">
                 <TextBox.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding SearchCommand}" CommandParameter="{Binding Token}"/>
+                    <KeyBinding Key="Return" Command="{Binding NugetSearchCommand}" CommandParameter="{Binding NugetToken}"/>
                 </TextBox.InputBindings>
             </TextBox>
             <Button Grid.Column="2" Style="{StaticResource PublishIconButtonStyle}"

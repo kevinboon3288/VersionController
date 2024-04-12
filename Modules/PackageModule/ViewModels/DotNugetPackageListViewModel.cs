@@ -65,8 +65,7 @@ public class DotNugetPackageListViewModel : BindableBase, INavigationAware
         get => _isVisible;
         set { SetProperty(ref _isVisible, value); }
     }
-
-    public DelegateCommand<string> SearchCommand { get; set; }
+    public DelegateCommand<string> DotNugetSearchCommand { get; set; }
     public DelegateCommand DeleteCommand { get; set; }
     public DelegateCommand PublishCommand { get; set; }
 
@@ -75,7 +74,7 @@ public class DotNugetPackageListViewModel : BindableBase, INavigationAware
         _logger = logger;
         _directoryUtils = directoryUtils;
 
-        SearchCommand = new DelegateCommand<string>(OnSearch);
+        DotNugetSearchCommand = new DelegateCommand<string>(OnDotNugetSearch);
         DeleteCommand = new DelegateCommand(OnDelete);
         PublishCommand = new DelegateCommand(OnPublish);
     }
@@ -98,7 +97,7 @@ public class DotNugetPackageListViewModel : BindableBase, INavigationAware
         }
     }
 
-    private void OnSearch(string token) 
+    private void OnDotNugetSearch(string token) 
     {
         if (string.IsNullOrEmpty(token))
         {
@@ -107,7 +106,7 @@ public class DotNugetPackageListViewModel : BindableBase, INavigationAware
 
         DotNuGetPackages.Clear();
 
-        List<(string, string?)> filterPackages = _directoryUtils.GetFilterPackages(token);
+        List<(string, string?)> filterPackages = _directoryUtils.GetDotNugetFilterPackages(token);
 
         foreach ((string filterPackage, string? version) in filterPackages)
         {
@@ -134,6 +133,8 @@ public class DotNugetPackageListViewModel : BindableBase, INavigationAware
         }
 
         _directoryUtils.Delete(deletePackages, ConstantFilePaths.DotNugetFilePath);
+
+        Refresh();
     }
 
     private void OnPublish()

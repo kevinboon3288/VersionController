@@ -9,7 +9,7 @@ public class PackageListViewModel : BindableBase, INavigationAware
     private Package _selectedPackage = new();
     private bool _isVisible = false;
     private bool _isAllChecked = false;
-    private string _token = string.Empty;
+    private string _nuGetToken = string.Empty;
 
     public ObservableCollection<Package> Packages
     {
@@ -17,13 +17,13 @@ public class PackageListViewModel : BindableBase, INavigationAware
         set { SetProperty(ref _packages, value); }
     }
 
-    public string Token
+    public string NugetToken
     {
-        get => _token;
+        get => _nuGetToken;
         set 
         { 
-            SetProperty(ref _token, value);
-            if (string.IsNullOrEmpty(_token)) 
+            SetProperty(ref _nuGetToken, value);
+            if (string.IsNullOrEmpty(_nuGetToken)) 
             { 
                 Refresh();
             }
@@ -66,7 +66,7 @@ public class PackageListViewModel : BindableBase, INavigationAware
         set { SetProperty(ref _isVisible, value); }
     }
 
-    public DelegateCommand<string> SearchCommand { get; set; }
+    public DelegateCommand<string> NugetSearchCommand { get; set; }
     public DelegateCommand DeleteCommand { get; set; }
     public DelegateCommand PublishCommand { get; set; }
 
@@ -75,7 +75,7 @@ public class PackageListViewModel : BindableBase, INavigationAware
         _logger = logger;
         _directoryUtils = directoryUtils;
 
-        SearchCommand = new DelegateCommand<string>(OnSearch);
+        NugetSearchCommand = new DelegateCommand<string>(OnNugetSearch);
         DeleteCommand = new DelegateCommand(OnDelete);
         PublishCommand = new DelegateCommand(OnPublish);
     }
@@ -98,7 +98,7 @@ public class PackageListViewModel : BindableBase, INavigationAware
         } 
     }
 
-    private void OnSearch(string token) 
+    private void OnNugetSearch(string token) 
     {
         if (string.IsNullOrEmpty(token)) 
         {
@@ -107,7 +107,7 @@ public class PackageListViewModel : BindableBase, INavigationAware
 
         Packages.Clear();
 
-        List<(string, string?)> filterPackages = _directoryUtils.GetFilterPackages(token);
+        List<(string, string?)> filterPackages = _directoryUtils.GetNugetFilterPackages(token);
 
         foreach ((string filterPackage, string? version) in filterPackages) 
         {
@@ -133,7 +133,9 @@ public class PackageListViewModel : BindableBase, INavigationAware
             }
         }
 
-        _directoryUtils.Delete(deletePackages, ConstantFilePaths.NugetX86FilePath);                     
+        _directoryUtils.Delete(deletePackages, ConstantFilePaths.NugetX86FilePath);
+
+        Refresh();
     }
 
     private void OnPublish() 

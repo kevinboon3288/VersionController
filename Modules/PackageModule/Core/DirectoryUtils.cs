@@ -3,7 +3,6 @@
     public class DirectoryUtils : IDirectoryUtils
     {
         private readonly ILogger _logger;
-        private const string _folderPattern = @"(?<=\..*)\.";
 
         public DirectoryUtils(ILogger logger)
         {
@@ -28,10 +27,18 @@
             return dotNugetPackages;
         }
 
-        public List<(string, string?)> GetFilterPackages(string filterFileNames)
+        public List<(string, string?)> GetDotNugetFilterPackages(string filterFileNames)
         {
             List<(string fileName, string? version)> packages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.DotNugetFilePath));
-            return packages.FindAll(x => x.fileName.Contains(filterFileNames.ToUpper())).ToList();
+
+            return packages.Where(x => x.fileName.Contains(filterFileNames) || (!string.IsNullOrEmpty(x.version) && x.version.Contains(filterFileNames))).ToList();   
+        }
+
+        public List<(string, string?)> GetNugetFilterPackages(string filterFileNames)
+        {
+            List<(string fileName, string? version)> packages = ReadPackages(Directory.GetDirectories(ConstantFilePaths.NugetX86FilePath));
+
+            return packages.Where(x => x.fileName.Contains(filterFileNames) || (!string.IsNullOrEmpty(x.version) && x.version.Contains(filterFileNames))).ToList();
         }
 
         private List<(string, string?)> ReadPackages(string[] filterFolderPaths) 
@@ -42,11 +49,7 @@
             {
                 string? version = Path.GetFileName(Directory.GetDirectories(folder, "*", SearchOption.TopDirectoryOnly).FirstOrDefault());
 
-                Match match = Regex.Match(folder, _folderPattern);
-                if (match.Success)
-                {
-                    folders.Add((Path.GetFileName(folder), version));
-                }
+                folders.Add((Path.GetFileName(folder), version));
             }            
 
             return folders;
