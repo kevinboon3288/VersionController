@@ -1,6 +1,5 @@
 ﻿global using System.IO;
 global using System.Diagnostics;
-global using System.Text.RegularExpressions;
 global using System.Collections.ObjectModel;
 global using Serilog;
 global using Prism.Ioc;

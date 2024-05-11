@@ -1,45 +1,44 @@
-﻿namespace MainModule.ViewModels
+﻿namespace MainModule.ViewModels;
+
+public class MainViewModel : BindableBase, INavigationAware
 {
-    public class MainViewModel : BindableBase, INavigationAware
+    private readonly ILogger _logger;
+    private readonly IRegionManager _regionManager;
+    private readonly IEventAggregator _eventAggregator;
+
+    public event EventHandler? LogReceived;
+
+    public MainViewModel(ILogger logger, IRegionManager regionManager, IEventAggregator eventAggregator)
     {
-        private readonly ILogger _logger;
-        private readonly IRegionManager _regionManager;
-        private readonly IEventAggregator _eventAggregator;
+        _logger = logger;
+        _regionManager = regionManager;
+        _eventAggregator = eventAggregator;
 
-        public event EventHandler? LogReceived;
+        _eventAggregator.GetEvent<LogEvent>().Subscribe(OnLogEventReceived);
+    }
 
-        public MainViewModel(ILogger logger, IRegionManager regionManager, IEventAggregator eventAggregator)
+    private void OnLogEventReceived(string message)
+    {
+        LogEventArgs eventArgs = new()
         {
-            _logger = logger;
-            _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
+            LogMessage = message
+        };
 
-            _eventAggregator.GetEvent<LogEvent>().Subscribe(OnLogEventReceived);
-        }
+        LogReceived?.Invoke(this, eventArgs);
+    }
 
-        private void OnLogEventReceived(string message)
-        {
-            LogEventArgs eventArgs = new()
-            {
-                LogMessage = message
-            };
+    public void OnNavigatedTo(NavigationContext navigationContext)
+    {
+        IRegion region = _regionManager.Regions["PackageListContentRegion"];
+        region.RequestNavigate("PackageListView");
+    }
 
-            LogReceived?.Invoke(this, eventArgs);
-        }
+    public bool IsNavigationTarget(NavigationContext navigationContext)
+    {
+        return true;
+    }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            IRegion region = _regionManager.Regions["PackageListContentRegion"];
-            region.RequestNavigate("PackageListView");
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
+    public void OnNavigatedFrom(NavigationContext navigationContext)
+    {
     }
 }

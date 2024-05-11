@@ -14,10 +14,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0">
+        <Border Grid.Column="0" Padding="10">
             <ContentControl prism:RegionManager.RegionName="DotNugetPackageContentRegion"/>
         </Border>
-        <Border Grid.Column="1">
+        <Border Grid.Column="1" Padding="10">
             <ContentControl prism:RegionManager.RegionName="PackageListContentRegion"/>
         </Border>
     </Grid>

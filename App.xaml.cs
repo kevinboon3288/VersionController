@@ -17,8 +17,6 @@ namespace VersionController
     /// </summary>
     public partial class App : PrismApplication
     {
-        private IRegionManager _regionManager;
-
         protected override Window CreateShell()
         {
             return Container.Resolve<VersionControllerWindow>();
@@ -37,7 +35,7 @@ namespace VersionController
                 .WriteTo.Sink(logControlSink, restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
                 .CreateLogger());
 
-            _regionManager = containerRegistry.GetContainer().Resolve<IRegionManager>();
+            IRegionManager _regionManager = containerRegistry.GetContainer().Resolve<IRegionManager>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -54,6 +52,7 @@ namespace VersionController
         {
             moduleCatalog.AddModule<MainModule.MainModule>();
             moduleCatalog.AddModule<PackageModule.PackageModule>();
+            moduleCatalog.AddModule<SettingsModule.SettingsModule>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -63,9 +62,7 @@ namespace VersionController
 
         protected override void OnExit(ExitEventArgs e)
         {
-            // Flush all Serilog sinks before the app closes
             Log.CloseAndFlush();
-
             base.OnExit(e);
         }
     }
