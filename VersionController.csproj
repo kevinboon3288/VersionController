@@ -32,6 +32,7 @@
     <ProjectReference Include="Common\CommonModule\CommonModule.csproj" />
     <ProjectReference Include="Modules\MainModule\MainModule.csproj" />
     <ProjectReference Include="Modules\PackageModule\PackageModule.csproj" />
+    <ProjectReference Include="Modules\SettingsModule\SettingsModule.csproj" />
     <ProjectReference Include="Resource\Resource.csproj" />
   </ItemGroup>
 </Project>

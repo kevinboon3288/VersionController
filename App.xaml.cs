@@ -52,6 +52,7 @@ namespace VersionController
         {
             moduleCatalog.AddModule<MainModule.MainModule>();
             moduleCatalog.AddModule<PackageModule.PackageModule>();
+            moduleCatalog.AddModule<SettingsModule.SettingsModule>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -61,9 +62,7 @@ namespace VersionController
 
         protected override void OnExit(ExitEventArgs e)
         {
-            // Flush all Serilog sinks before the app closes
             Log.CloseAndFlush();
-
             base.OnExit(e);
         }
     }
