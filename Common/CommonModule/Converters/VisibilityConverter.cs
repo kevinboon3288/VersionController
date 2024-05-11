@@ -1,33 +1,32 @@
-﻿namespace CommonModule.Converters
+﻿namespace CommonModule.Converters;
+
+public class VisibilityConverter : IValueConverter
 {
-    public class VisibilityConverter : IValueConverter
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        try
         {
-            try
-            {
-                bool boolValue = false;
+            bool boolValue = false;
 
-                if (value is bool)
-                {
-                    boolValue = (bool)value;
-                }
-                else if (value is bool?)
-                {
-                    boolValue = (bool?)value ?? false;
-                }
-
-                return boolValue ? Visibility.Visible : Visibility.Collapsed;
-            }
-            catch (Exception ex)
+            if (value is bool)
             {
-                throw new ArgumentNullException($"Unable to convert at {nameof(VisibilityConverter)}: {ex.Message}");
+                boolValue = (bool)value;
             }
+            else if (value is bool?)
+            {
+                boolValue = (bool?)value ?? false;
+            }
+
+            return boolValue ? Visibility.Visible : Visibility.Collapsed;
         }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        catch (Exception ex)
         {
-            return value is Visibility ? (Visibility)value == Visibility.Visible : false;
+            throw new ArgumentNullException($"Unable to convert at {nameof(VisibilityConverter)}: {ex.Message}");
         }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value is Visibility ? (Visibility)value == Visibility.Visible : false;
     }
 }
