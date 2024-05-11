@@ -109,9 +109,12 @@
                 {
                     Task.Run(() =>
                     {
-                        using (Process process = Process.Start(cmdPublisherStartInfo))
+                        using (Process? process = Process.Start(cmdPublisherStartInfo))
                         {
-                            process!.WaitForExit();
+                            if(process != null)
+                            {
+                                process.WaitForExit(); 
+                            }
                         }
                     });
                 }
