@@ -1,0 +1,46 @@
+﻿<Project>
+  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.0-rc.4" />
+  <PropertyGroup>
+    <OutputName>VersionController-$(Configuration)-$(Platform)</OutputName>
+    <Name>VersionController.Installer</Name>
+    <RunWixToolsOutOfProc Condition=" '$(PROCESSOR_ARCHITECTURE)'!='x86' ">true</RunWixToolsOutOfProc>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DefineConstants>Debug</DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0-rc.4" />
+    <PackageReference Include="WixToolset.Heat" Version="4.0.0-rc.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\VersionController.csproj">
+      <Name>VersionController</Name>
+      <Project>{39F3A62F-2154-4748-B294-9B9DEBAE599B}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.0-rc.4" />
+  <Target Name="BeforeBuild">
+    <GetAssemblyIdentity AssemblyFiles="..\..\bin\$(Configuration)\net8.0-windows\VersionController.dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    <PropertyGroup>
+      <DefineConstants>BuildVersion=%(AssemblyVersion.Version);MainBasePath=..\VersionController.Installer\bin\$(Configuration);</DefineConstants>
+    </PropertyGroup>
+    <HeatDirectory OutputFile="ComponentsGenerated.wxs" DirectoryRefId="MainUIFolder" ComponentGroupName="PublishedAppUIComponents" SuppressCom="true" Directory="..\VersionController.Installer\bin\$(Platform)\$(Configuration)\net6.0-windows\publish" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.MainBasePath" />
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

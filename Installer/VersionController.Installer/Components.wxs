@@ -1,0 +1,23 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<ComponentRef Id="MainAppShortcut" />
+		</ComponentGroup>
+
+		<DirectoryRef Id="INSTALLFOLDER" FileSource="..\..\VersionController\bin\Debug\netcoreapp3.1\win-$(var.Platform)\publish">
+      
+			<Component Id="MainAppShortcut" Guid="{FB4A374B-53EA-4F3F-B8B9-BC4A1C20C878}">
+				<Shortcut Id="MainUIAppShortcut" Name="!(loc.ProductName_$(var.Platform))" 
+                  Target="[INSTALLFOLDER]VersionControllerUI\VersionController.exe" 
+                  Directory="InstallProgramMenuFolder" 
+                  WorkingDirectory="INSTALLFOLDER" 
+                  />
+        
+				<RegistryValue Id="RegShortcutKey" Root="HKCU" Key="SOFTWARE\!(loc.ProductNameFolder)" Name="Shortcut" Value="1" Type="integer" KeyPath="yes" />
+				<RemoveFolder Id="RemoveStartMenu" Directory="InstallProgramMenuFolder" On="uninstall" />
+			</Component>
+		</DirectoryRef>
+
+
+	</Fragment>
+</Wix>
