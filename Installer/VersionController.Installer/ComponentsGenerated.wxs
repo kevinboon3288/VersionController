@@ -1,0 +1,102 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="MainUIFolder">
+            <Component Id="cmpJE0G5IUtaRILQGELIBgnANTR5t4" Guid="{76677C64-F725-4383-B5BD-4A8186071D0E}">
+                <File Id="filY_E3hqc0uHcP.sPoQ8sLihSeQBw" KeyPath="yes" Source="$(var.MainBasePath)\CommonModule.dll" />
+            </Component>
+            <Component Id="cmpzh8zytjkUSXTroBqREW4z2Tonug" Guid="{F15C9DE9-D758-421E-9109-08E3F4B16034}">
+                <File Id="filTTXHEhmYnnTmL1WvH6K2ok9rQcs" KeyPath="yes" Source="$(var.MainBasePath)\CommonModule.pdb" />
+            </Component>
+            <Component Id="cmpu.YAXsXQWKEXEdK8DT2._YvAOQA" Guid="{04F53D36-BFE7-41B7-B63B-000BD22E2785}">
+                <File Id="filQJ3YtTlYyqOM8HVY0yiG20750Cc" KeyPath="yes" Source="$(var.MainBasePath)\MainModule.dll" />
+            </Component>
+            <Component Id="cmpk.LX06kbVUgDCgpkHpJbVxtHUH8" Guid="{49EE457F-E4C0-4823-9E5A-D5ADF37B98A7}">
+                <File Id="filplIcu8FByTeMzYPGpAeQr4aUZjk" KeyPath="yes" Source="$(var.MainBasePath)\MainModule.pdb" />
+            </Component>
+            <Component Id="cmp1FvqwvwmXYU7ysUoLTjLc.U9OmI" Guid="{09C27D70-60DC-4ACE-9B9F-1A0084D3F378}">
+                <File Id="filWAXWCdghL9r4XnE0xnFB.hFlOxo" KeyPath="yes" Source="$(var.MainBasePath)\Microsoft.Xaml.Behaviors.dll" />
+            </Component>
+            <Component Id="cmpxS0KlCa2n5LoidzMvMgCyWwvqvg" Guid="{9B168898-AC4B-46FD-ABE8-E90BF07CD107}">
+                <File Id="filSwX4BGqdje.jLZe_E7dwwZAZT54" KeyPath="yes" Source="$(var.MainBasePath)\PackageModule.dll" />
+            </Component>
+            <Component Id="cmpK6Z1auv_XhIKfZbTdOjapwGkGk0" Guid="{E6C87C9B-D11E-43A2-A074-8ABF2C17AF97}">
+                <File Id="filgTa9m609MyfDSb6Xr9KC9cq2Jy8" KeyPath="yes" Source="$(var.MainBasePath)\PackageModule.pdb" />
+            </Component>
+            <Component Id="cmpS7Q9qwavrpCOGMYx3pffz4YY_gk" Guid="{D507F4F0-C7D5-49A9-92AC-818BAF92512B}">
+                <File Id="filuCDiJOlsI3AbBjYGjQPwd.0EvNo" KeyPath="yes" Source="$(var.MainBasePath)\Prism.dll" />
+            </Component>
+            <Component Id="cmpqpH2JJwPWWCuWO9q9huh62k3Abs" Guid="{FE6CD06B-2310-46F7-AD75-B7A03117EE69}">
+                <File Id="filnAdzNIbLO5HHkUZ6e12I70yz6to" KeyPath="yes" Source="$(var.MainBasePath)\Prism.Logging.Serilog.dll" />
+            </Component>
+            <Component Id="cmpGU.ac7zGPAKn6rUsbAVLpqj6TuQ" Guid="{15605484-F618-4A76-ACFB-636D6CA12F70}">
+                <File Id="fil7jdeaTrar.RzJsBG0jdUGntA7j4" KeyPath="yes" Source="$(var.MainBasePath)\Prism.Unity.Wpf.dll" />
+            </Component>
+            <Component Id="cmpSOmLVevMMETyQ5mx_L32U9i6QpI" Guid="{28CA3D82-8C32-416D-A335-11D9BA65B1DF}">
+                <File Id="filD4IQYqxfCVErZpTWQszUbwcvd0o" KeyPath="yes" Source="$(var.MainBasePath)\Prism.Wpf.dll" />
+            </Component>
+            <Component Id="cmpYMKjdnyZSO0yv6LgVbgTxZUUN.8" Guid="{248353AB-A269-40C7-877B-85218A626639}">
+                <File Id="fileWKMDTGW2IyqL.fQTtgD2jxoA1k" KeyPath="yes" Source="$(var.MainBasePath)\Resource.dll" />
+            </Component>
+            <Component Id="cmp2W9.0BkwEoXuaV1KNYJAs4k4fy4" Guid="{3CCC09DC-EABB-4371-BCF3-3D07EC3B833A}">
+                <File Id="fil3Qb7Dv7Tw9jkC.BHDedAS64uLbY" KeyPath="yes" Source="$(var.MainBasePath)\Resource.pdb" />
+            </Component>
+            <Component Id="cmpQcbCMlSvBENXStHYj1XtJG9SItY" Guid="{7EE42008-96D2-4194-82E9-05B625804236}">
+                <File Id="fil4Oa.vsdY5yd9dhq.ccw3pTkLLE8" KeyPath="yes" Source="$(var.MainBasePath)\Serilog.dll" />
+            </Component>
+            <Component Id="cmpAu0Kd3xmSE1nLbpPS5Y90gUeR54" Guid="{2E6DC7F5-3D82-4FEE-AAC0-F7E2B246B83E}">
+                <File Id="fil04XOWuGj3qH1Ilx8Eix1CI3fjTo" KeyPath="yes" Source="$(var.MainBasePath)\SettingsModule.dll" />
+            </Component>
+            <Component Id="cmplnKmbe5u_WPvmfcitdM3akf9tDk" Guid="{80753C04-98FE-4B3B-AA52-54EA347AC39C}">
+                <File Id="filVpdM5_Vw0W.jEJgb2y_SkyN9AkQ" KeyPath="yes" Source="$(var.MainBasePath)\SettingsModule.pdb" />
+            </Component>
+            <Component Id="cmpcDAqahz19e01PEe7FmI_cVtB7Iw" Guid="{2FDCC553-E33D-413E-BFC3-7C524CE0BD9A}">
+                <File Id="filjM9GBhE_LYt6s3Yf9u13SajcoBk" KeyPath="yes" Source="$(var.MainBasePath)\Unity.Abstractions.dll" />
+            </Component>
+            <Component Id="cmpaEO4EaY_EY.X7umMiOERcs0Ujfg" Guid="{FB78849F-F9B5-4099-990C-4662A714BF12}">
+                <File Id="filDwK047K5Bj91CcGCtzT0ua_WEfo" KeyPath="yes" Source="$(var.MainBasePath)\Unity.Container.dll" />
+            </Component>
+            <Component Id="cmpxzFLZttro6UZQR2ctDkPVwCwank" Guid="{0E99F28A-B94B-4E50-86C2-4EBBECCAF2E5}">
+                <File Id="fil5rtQAxVwWLbTrsaNDp4BdIhEJto" KeyPath="yes" Source="$(var.MainBasePath)\VersionController.deps.json" />
+            </Component>
+            <Component Id="cmpSrEOR.NC25v2RLhOnfLaj4kjvTc" Guid="{1E0DE3F1-CE30-4AE9-91D6-64AD7F72B753}">
+                <File Id="filnvlRF5n3xok02XGvXPevvo8BIc8" KeyPath="yes" Source="$(var.MainBasePath)\VersionController.dll" />
+            </Component>
+            <Component Id="cmp4yGQxouOc177.jIwVKM6Tgy81U4" Guid="{A9A7928F-8AF4-44EA-8566-6BD07238DB68}">
+                <File Id="filo7eFXvapaL81WlPxVRG1fX9NueU" KeyPath="yes" Source="$(var.MainBasePath)\VersionController.exe" />
+            </Component>
+            <Component Id="cmp8e2Y7UMO4mJFTNCl98pdmNQna5M" Guid="{59155C0D-DE21-4CD6-BFC0-AF97AC0DBC19}">
+                <File Id="filwUOjtCEp0K6TGeH.7DU5DkS43xA" KeyPath="yes" Source="$(var.MainBasePath)\VersionController.pdb" />
+            </Component>
+            <Component Id="cmpsIrkDIsD0uHzsOKsdDeCF1APj_Y" Guid="{EFDCD92F-533E-4B71-BF70-2E2A121618F7}">
+                <File Id="fil7r._xqAadE1iuZNUHQbukVWsO3E" KeyPath="yes" Source="$(var.MainBasePath)\VersionController.runtimeconfig.json" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="PublishedAppUIComponents">
+            <ComponentRef Id="cmpJE0G5IUtaRILQGELIBgnANTR5t4" />
+            <ComponentRef Id="cmpzh8zytjkUSXTroBqREW4z2Tonug" />
+            <ComponentRef Id="cmpu.YAXsXQWKEXEdK8DT2._YvAOQA" />
+            <ComponentRef Id="cmpk.LX06kbVUgDCgpkHpJbVxtHUH8" />
+            <ComponentRef Id="cmp1FvqwvwmXYU7ysUoLTjLc.U9OmI" />
+            <ComponentRef Id="cmpxS0KlCa2n5LoidzMvMgCyWwvqvg" />
+            <ComponentRef Id="cmpK6Z1auv_XhIKfZbTdOjapwGkGk0" />
+            <ComponentRef Id="cmpS7Q9qwavrpCOGMYx3pffz4YY_gk" />
+            <ComponentRef Id="cmpqpH2JJwPWWCuWO9q9huh62k3Abs" />
+            <ComponentRef Id="cmpGU.ac7zGPAKn6rUsbAVLpqj6TuQ" />
+            <ComponentRef Id="cmpSOmLVevMMETyQ5mx_L32U9i6QpI" />
+            <ComponentRef Id="cmpYMKjdnyZSO0yv6LgVbgTxZUUN.8" />
+            <ComponentRef Id="cmp2W9.0BkwEoXuaV1KNYJAs4k4fy4" />
+            <ComponentRef Id="cmpQcbCMlSvBENXStHYj1XtJG9SItY" />
+            <ComponentRef Id="cmpAu0Kd3xmSE1nLbpPS5Y90gUeR54" />
+            <ComponentRef Id="cmplnKmbe5u_WPvmfcitdM3akf9tDk" />
+            <ComponentRef Id="cmpcDAqahz19e01PEe7FmI_cVtB7Iw" />
+            <ComponentRef Id="cmpaEO4EaY_EY.X7umMiOERcs0Ujfg" />
+            <ComponentRef Id="cmpxzFLZttro6UZQR2ctDkPVwCwank" />
+            <ComponentRef Id="cmpSrEOR.NC25v2RLhOnfLaj4kjvTc" />
+            <ComponentRef Id="cmp4yGQxouOc177.jIwVKM6Tgy81U4" />
+            <ComponentRef Id="cmp8e2Y7UMO4mJFTNCl98pdmNQna5M" />
+            <ComponentRef Id="cmpsIrkDIsD0uHzsOKsdDeCF1APj_Y" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

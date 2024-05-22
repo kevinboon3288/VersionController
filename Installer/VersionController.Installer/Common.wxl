@@ -1,0 +1,18 @@
+﻿<WixLocalization Culture="en-us" xmlns="http://wixtoolset.org/schemas/v4/wxl">
+
+  <String Id="Author" Value="Tan Chee Boon" />
+  <String Id="ProductNameFolder" Value="VersionController.UI.Application" />
+  <String Id="MainUIFolder" Value="VersionControllerUI" />
+  <String Id="ProductName_x86" Value="Version Controller App (32bit)" />
+  <String Id="ProductName_x64" Value="Version Controller App (64bit)" />
+  <String Id="WelcomeEulaDlg_Title" Value="[ProductName] [ProductVersion] Installation Setup" />
+  <String Id="ProgressDlg_Title" Value="[ProductName] [ProductVersion] Installation Setup" />
+  <String Id="UserExit_Title" Value="[ProductName] [ProductVersion] Installation Setup" />
+  <String Id="ExitDialog_Title" Value="[ProductName] [ProductVersion] Installation Setup" />
+  <String Id="FatalError_Title" Value="[ProductName] [ProductVersion] Installation Setup" />
+
+  <String Id="Description" Value="Version Controller Client Application" />
+  <String Id="DowngradeErrorMessage" Value="A newer version of Version Controller Application is already installed." />
+  <String Id="Language" Value="1033" />
+
+</WixLocalization>
