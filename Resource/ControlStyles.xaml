@@ -2,22 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!--Color Definition in StaticResource-->
-    <SolidColorBrush x:Key="LightPurpleColor" Color="#c8bfe7" Opacity="1"/>
-    <SolidColorBrush x:Key="LightBlueColor" Color="#8cbbf1" Opacity="1"/>
-    <SolidColorBrush x:Key="GreyColor" Color="#d8deea" Opacity="1"/>
-    <SolidColorBrush x:Key="RedColor" Color="#f9cedf" Opacity="1"/>
-    <SolidColorBrush x:Key="BlackColor" Color="#000000" Opacity="1"/>
-    <SolidColorBrush x:Key="YellowColor" Color="#fceecc" Opacity="1"/>
-    <SolidColorBrush x:Key="LightYellowColor" Color="#fceeca" Opacity="1"/>
-    <SolidColorBrush x:Key="GreenColor" Color="#6bc6a5" Opacity="1"/>
 
-    <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="Margin" Value="8"/>
-        <Setter Property="Background" Value="{StaticResource LightBlueColor}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BlackColor}"/>
-        <Setter Property="BorderThickness" Value="4"/>
-    </Style>
-
+    <SolidColorBrush x:Key="Primary" Color="#7896b5" Opacity="1"/>
+    <SolidColorBrush x:Key="Secondary" Color="#8a9bbc" Opacity="1"/>
+    <SolidColorBrush x:Key="Tertiary" Color="#b8c4ca" Opacity="1"/>
+    <SolidColorBrush x:Key="ForegroundDark" Color="#2b2d2c" Opacity="1"/>
+    <SolidColorBrush x:Key="ForegroundLight" Color="#d2d9d5" Opacity="1"/>
+    
     <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Sora"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
@@ -25,29 +16,29 @@
 
     <Style x:Key="HeaderTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockStyle}">
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundDark}"/>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <Style x:Key="LogMessageTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockStyle}">
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundDark}"/>
     </Style>
 
     <Style x:Key="FolderTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockStyle}">
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="Foreground" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundDark}"/>
         <Setter Property="Margin" Value="2"/>
     </Style>
 
     <Style x:Key="LogMessageTextBoxStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="FontFamily" Value="Sora"/>
+        <Setter Property="FontFamily" Value="Neuton"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{StaticResource BlackColor}"/>
-        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundDark}"/>
+        <Setter Property="Margin" Value="10"/>
         <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Background" Value="White"/>

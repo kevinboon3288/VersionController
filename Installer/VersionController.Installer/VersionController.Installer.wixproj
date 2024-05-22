@@ -37,13 +37,13 @@
       <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
     </GetAssemblyIdentity>
     <PropertyGroup>
-      <DefineConstants>BuildVersion=%(AssemblyVersion.Version);MainBasePath=..\..\bin\$(Configuration)\net8.0-windows\;</DefineConstants>
+      <DefineConstants>BuildVersion=%(AssemblyVersion.Version);MainBasePath=..\..\bin\$(Configuration)\net8.0-windows;</DefineConstants>
     </PropertyGroup>
     <HeatDirectory OutputFile="ComponentsGenerated.wxs" 
                    DirectoryRefId="MainUIFolder" 
                    ComponentGroupName="PublishedAppUIComponents" 
                    SuppressCom="true" 
-                   Directory="..\..\bin\$(Configuration)\net8.0-windows\" 
+                   Directory="..\..\bin\$(Configuration)\net8.0-windows" 
                    SuppressFragments="true" 
                    SuppressRegistry="true" 
                    SuppressRootDirectory="true" 

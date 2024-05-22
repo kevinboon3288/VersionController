@@ -10,8 +10,8 @@
 				<Shortcut Id="MainUIAppShortcut" Name="!(loc.ProductName_$(var.Platform))" 
                   Target="[INSTALLFOLDER]VersionControllerUI\VersionController.exe" 
                   Directory="InstallProgramMenuFolder" 
-                  WorkingDirectory="INSTALLFOLDER" 
-                  />
+                  WorkingDirectory="INSTALLFOLDER"
+                  Icon="VersionControllerIcon"/>
         
 				<RegistryValue Id="RegShortcutKey" Root="HKCU" Key="SOFTWARE\!(loc.ProductNameFolder)" Name="Shortcut" Value="1" Type="integer" KeyPath="yes" />
 				<RemoveFolder Id="RemoveStartMenu" Directory="InstallProgramMenuFolder" On="uninstall" />
