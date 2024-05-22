@@ -13,10 +13,12 @@
     <None Remove="Icons\Search30x30.png" />
     <None Remove="Icons\Unchecked32x32.png" />
     <None Remove="Icons\Upload16x16.png" />
+    <None Remove="Icons\VersionControllerIcon.ico" />
     <None Remove="Images\Choose.gif" />
     <None Remove="Images\Destruction.gif" />
     <None Remove="Images\Rebuild.gif" />
     <None Remove="Images\Upload.gif" />
+    <None Remove="Images\VersionControllerIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Checked32x32.png">
@@ -40,6 +42,9 @@
     <Resource Include="Icons\Upload16x16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\VersionControllerIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Choose.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -50,6 +55,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Upload.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\VersionControllerIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

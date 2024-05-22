@@ -4,19 +4,19 @@
   <?define UpgradeCode = "{F9057EEB-AC6A-42DA-B690-D777BC8B655E}" ?>
 
   <Package Name="!(loc.ProductName_$(var.Platform))" Language="!(loc.Language)" Version="$(var.BuildVersion)" Manufacturer="!(loc.Author)" UpgradeCode="$(var.UpgradeCode)" InstallerVersion="200">
-
     <SummaryInformation Manufacturer="!(loc.Author)" Description="!(loc.Description)" />
-
     <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" />
     <MediaTemplate EmbedCab="yes" />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/kevinboon3288/cheque-writer" />
     <ui:WixUI Id="WixUI_Minimal" />
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)AppResources\LICENSE.md" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\AppResources\LICENSE.txt" />
 
     <Feature Id="ProductFeature" Title="Version Controller Installer" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="PublishedAppUIComponents" /> 
     </Feature>
+    <Icon Id="VersionControllerIcon" SourceFile="$(var.ProjectDir)\AppResources\VersionControllerIcon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="VersionControllerIcon" />
   </Package>
 
 </Wix>

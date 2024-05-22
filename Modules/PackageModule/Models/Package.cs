@@ -18,7 +18,6 @@ public class Package : BindableBase
         set { SetProperty(ref _version, value); }
     }
 
-
     public bool IsChecked
     {
         get => _isChecked;
