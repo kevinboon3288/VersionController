@@ -37,9 +37,20 @@
       <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
     </GetAssemblyIdentity>
     <PropertyGroup>
-      <DefineConstants>BuildVersion=%(AssemblyVersion.Version);MainBasePath=..\VersionController.Installer\bin\$(Configuration);</DefineConstants>
+      <DefineConstants>BuildVersion=%(AssemblyVersion.Version);MainBasePath=..\..\bin\$(Configuration)\net8.0-windows\;</DefineConstants>
     </PropertyGroup>
-    <HeatDirectory OutputFile="ComponentsGenerated.wxs" DirectoryRefId="MainUIFolder" ComponentGroupName="PublishedAppUIComponents" SuppressCom="true" Directory="..\VersionController.Installer\bin\$(Platform)\$(Configuration)\net6.0-windows\publish" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.MainBasePath" />
+    <HeatDirectory OutputFile="ComponentsGenerated.wxs" 
+                   DirectoryRefId="MainUIFolder" 
+                   ComponentGroupName="PublishedAppUIComponents" 
+                   SuppressCom="true" 
+                   Directory="..\..\bin\$(Configuration)\net8.0-windows\" 
+                   SuppressFragments="true" 
+                   SuppressRegistry="true" 
+                   SuppressRootDirectory="true" 
+                   AutoGenerateGuids="false" 
+                   GenerateGuidsNow="true" 
+                   ToolPath="$(WixToolPath)" 
+                   PreprocessorVariable="var.MainBasePath" />
   </Target>
   <Target Name="AfterBuild">
   </Target>

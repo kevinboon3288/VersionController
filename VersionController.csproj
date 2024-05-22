@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <Version>1.0.0</Version>
     <TargetFramework>net8.0-windows</TargetFramework>
     <LangVersion>default</LangVersion>
     <Nullable>enable</Nullable>

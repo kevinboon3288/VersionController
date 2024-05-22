@@ -11,7 +11,7 @@
     <MediaTemplate EmbedCab="yes" />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/kevinboon3288/cheque-writer" />
     <ui:WixUI Id="WixUI_Minimal" />
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\AppResources\LICENSE.md" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)AppResources\LICENSE.md" />
 
     <Feature Id="ProductFeature" Title="Version Controller Installer" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
