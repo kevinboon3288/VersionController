@@ -1,20 +1,26 @@
 ﻿using Prism.Commands;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SettingsModule.ViewModels;
+namespace MainModule.ViewModels;
 
-public class SettingsViewModel : BindableBase, INavigationAware
+public class HeaderViewModel : BindableBase, INavigationAware
 {
     private readonly ILogger _logger;
     private readonly IRegionManager _regionManager;
 
-    public DelegateCommand ReturnToMainCommand { get; set; }
+    public DelegateCommand NavigateToSettingsCommand {  get; set; }
 
-    public SettingsViewModel(ILogger logger, IRegionManager regionManager)
+
+    public HeaderViewModel(ILogger logger, IRegionManager regionManager)
     {
         _logger = logger;
         _regionManager = regionManager;
 
-        ReturnToMainCommand = new DelegateCommand(OnReturnToMain);
+        NavigateToSettingsCommand = new DelegateCommand(OnNavigateToSettings);
     }
 
     public void OnNavigatedTo(NavigationContext navigationContext)
@@ -30,9 +36,9 @@ public class SettingsViewModel : BindableBase, INavigationAware
     {
     }
 
-    private void OnReturnToMain()
+    private void OnNavigateToSettings() 
     {
         IRegion region = _regionManager.Regions["MainContentRegion"];
-        region.RequestNavigate("MainView");
+        region.RequestNavigate("SettingsView");
     }
 }

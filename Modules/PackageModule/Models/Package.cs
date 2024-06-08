@@ -35,7 +35,7 @@ public class Package : BindableBase
     public Package(string name, string? version)
     {
         _name = name;
-        _version = version;
+        _version = $"[{version}]";
         _isChecked = false;
     }
 }

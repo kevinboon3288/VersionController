@@ -13,13 +13,13 @@ public class SettingsModule : IModule
 
     public void OnInitialized(IContainerProvider containerProvider)
     {
-        //_regionManager.RegisterViewWithRegion("MainContentRegion", typeof(MainView));
+        _regionManager.RegisterViewWithRegion("SettingContentRegion", typeof(SettingsView));
     }
 
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
-        //containerRegistry.RegisterForNavigation<MainView>();
-       
-        //ViewModelLocationProvider.Register<MainView, MainViewModel>();
+        containerRegistry.RegisterForNavigation<SettingsView>();
+
+        ViewModelLocationProvider.Register<SettingsView, SettingsViewModel>();
     }
 }
