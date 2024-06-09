@@ -43,10 +43,6 @@
     <Page Remove="Modules\**" />
     <Page Remove="Resource\**" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Content Include="Resource\Icons\VersionControllerIcon.ico" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Logging.Serilog" Version="7.2.0.1423" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />

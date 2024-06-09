@@ -22,13 +22,17 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Border Grid.Column="0" Grid.Row="0">
+            <ContentControl prism:RegionManager.RegionName="HeaderContentRegion"/>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1">
             <ContentControl prism:RegionManager.RegionName="PackageContentRegion"/>
         </Border>
-        <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+        <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
             <StackPanel >
                 <TextBox x:Name="LogMessageBox" Style="{StaticResource LogMessageTextBoxStyle}"/>
             </StackPanel>
