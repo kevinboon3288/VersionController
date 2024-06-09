@@ -1,6 +1,4 @@
-﻿using Prism.Commands;
-
-namespace SettingsModule.ViewModels;
+﻿namespace SettingsModule.ViewModels;
 
 public class SettingsViewModel : BindableBase, INavigationAware
 {
@@ -19,6 +17,8 @@ public class SettingsViewModel : BindableBase, INavigationAware
 
     public void OnNavigatedTo(NavigationContext navigationContext)
     {
+        IRegion region = _regionManager.Regions["SettingsProjectContentRegion"];
+        region.RequestNavigate("SettingsProjectView");
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -1,11 +1,4 @@
-﻿using Prism.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MainModule.ViewModels;
+﻿namespace MainModule.ViewModels;
 
 public class HeaderViewModel : BindableBase, INavigationAware
 {
@@ -13,7 +6,6 @@ public class HeaderViewModel : BindableBase, INavigationAware
     private readonly IRegionManager _regionManager;
 
     public DelegateCommand NavigateToSettingsCommand {  get; set; }
-
 
     public HeaderViewModel(ILogger logger, IRegionManager regionManager)
     {

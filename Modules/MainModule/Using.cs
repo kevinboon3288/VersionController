@@ -3,6 +3,7 @@ global using Prism.Modularity;
 global using Prism.Mvvm;
 global using Prism.Regions;
 global using Prism.Events;
+global using Prism.Commands;
 global using Serilog;
 global using MainModule.ViewModels;
 global using MainModule.Views;

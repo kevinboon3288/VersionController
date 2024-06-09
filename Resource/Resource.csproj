@@ -10,7 +10,9 @@
     <None Remove="Icons\Delete16x16.png" />
     <None Remove="Icons\Done16x16.png" />
     <None Remove="Icons\Fail16x16.png" />
+    <None Remove="Icons\Return16x16.png" />
     <None Remove="Icons\Search30x30.png" />
+    <None Remove="Icons\Settings16x16.png" />
     <None Remove="Icons\Unchecked32x32.png" />
     <None Remove="Icons\Upload16x16.png" />
     <None Remove="Icons\VersionControllerIcon.ico" />
@@ -33,7 +35,13 @@
     <Resource Include="Icons\Fail16x16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\Return16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\Search30x30.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Settings16x16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Unchecked32x32.png">

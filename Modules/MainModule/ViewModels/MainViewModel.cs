@@ -1,4 +1,6 @@
-﻿namespace MainModule.ViewModels;
+﻿using CommonModule.Events.Payloads;
+
+namespace MainModule.ViewModels;
 
 public class MainViewModel : BindableBase, INavigationAware
 {

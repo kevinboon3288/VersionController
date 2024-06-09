@@ -66,9 +66,8 @@ public class PackageListViewModel : BindableBase, INavigationAware
         set { SetProperty(ref _isVisible, value); }
     }
 
-    public DelegateCommand<string> NugetSearchCommand { get; set; }
-    public DelegateCommand DeleteCommand { get; set; }
-    public DelegateCommand PublishCommand { get; set; }
+    public DelegateCommand<string> NugetSearchCommand { get; private set; }
+    public DelegateCommand DeleteCommand { get; private set; }
 
     public PackageListViewModel(ILogger logger, IDirectoryUtils directoryUtils)
     {
@@ -77,7 +76,6 @@ public class PackageListViewModel : BindableBase, INavigationAware
 
         NugetSearchCommand = new DelegateCommand<string>(OnNugetSearch);
         DeleteCommand = new DelegateCommand(OnDelete);
-        PublishCommand = new DelegateCommand(OnPublish);
     }
 
     public void OnNavigatedTo(NavigationContext navigationContext)
@@ -136,11 +134,6 @@ public class PackageListViewModel : BindableBase, INavigationAware
         _directoryUtils.Delete(deletePackages, ConstantFilePaths.NugetX86FilePath);
 
         Refresh();
-    }
-
-    private void OnPublish() 
-    { 
-        //TODO: Implement the publish feature
     }
 
     public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -113,9 +113,9 @@ public class DirectoryUtils : IDirectoryUtils
 
                     using (Process? process = Process.Start(cmdPublisherStartInfo))
                     {
-                        if(process != null)
+                        if (process != null)
                         {
-                            process.WaitForExit(); 
+                            process.WaitForExit();
                             _logger.Information($"{process.ExitCode}");
                         }
                     }
@@ -127,6 +127,10 @@ public class DirectoryUtils : IDirectoryUtils
             }
 
             _logger.Information("Publish of NuGet in NugetPackages directory is Completed");
+        }
+        else 
+        {
+            _logger.Error($"Unable to publish due to {directory} is not exist");
         }
     }
 }
