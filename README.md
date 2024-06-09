@@ -33,7 +33,8 @@ git clone https://github.com/kevinboon3288/version-controller.git
 ```
 
 ## Application Design
-![image](https://github.com/kevinboon3288/version-controller/assets/38966644/d167f742-a5a8-48a3-96a2-450b5e739419)
+![image](https://github.com/kevinboon3288/version-controller/assets/38966644/36ae3e67-6842-4def-9019-c7336d63d989)
+
 
 ## Usage
 1. Navigate to the project directory.
