@@ -23,6 +23,7 @@ Welcome to Version Controller! This tool helps manage versioning of your softwar
 - **UI Framework:** WPF (Windows Presentation Foundation)
 - **Architectural Pattern:** MVVM (Model-View-ViewModel)
 - **Library:** Prism
+- **Logging:** Serilog
 
 ## Installation
 
